@@ -45,6 +45,14 @@ app.get("/books", async (req, res) => {
 });
 
 // ✅ Delete a book by ID
+app.delete("/books/:id", async (req, res) => {
+  try {
+    await Book.findByIdAndDelete(req.params.id);
+    res.send("Deleted");
+  } catch (error) {
+    res.status(500).send("Error deleting book");
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
